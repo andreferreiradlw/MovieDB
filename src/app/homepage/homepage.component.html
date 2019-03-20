@@ -1,0 +1,48 @@
+<main class="container-fluid bg-dark px-lg-5">
+  <header class="row">
+    <div class="col-12">
+      <div class="jumbotron text-light bg-dark">
+        <h1 class="display-4">Hello, world!</h1>
+        <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+        <button [disabled]="showMovies" type="button" class="btn btn-light m-2" (click)="getTopMovies()">Top Movies</button>
+        <button [disabled]="showTvShows" type="button" class="btn btn-light m-2" (click)="getTopShows()">Top Series</button>
+        <button [disabled]="showPersons" type="button" class="btn btn-light m-2" (click)="getTopPersons()">Top People</button>
+      </div>
+    </div>
+  </header>
+  <div class="row mx-lg-n5" *ngIf="showMovies">
+    <div class="col-12 col-sm-6 col-lg-4 d-flex py-3 px-m-5" *ngFor="let movie of top20Movies">
+      <div class="card">
+        <img src="{{movie.getBackdrop()}}" class="card-img-top" alt="{{movie.title}}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{movie.title}}</h5>
+          <p class="card-text flex-grow-1">{{movie.shortOverview()}}</p>
+          <button type="button" class="btn btn-dark align-self-end">Full Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mx-lg-n5" *ngIf="showTvShows">
+    <div class="col-12 col-sm-6 col-lg-4 d-flex py-3 px-m-5" *ngFor="let show of top20Shows">
+      <div class="card">
+        <img src="{{show.getBackdrop()}}" class="card-img-top" alt="{{show.title}}">
+        <div class="card-body d-flex flex-column">
+          <h5 class="card-title">{{show.name}}</h5>
+          <p class="card-text flex-grow-1">{{show.shortOverview()}}</p>
+          <button type="button" class="btn btn-dark align-self-end">Full Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row mx-lg-n5" *ngIf="showPersons">
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-2 d-flex py-3 px-m-5" *ngFor="let person of top20Persons">
+      <div class="card">
+        <img src="{{person.getBackdrop()}}" class="card-img-top" alt="{{person.title}}">
+        <div class="card-body d-flex flex-column p-1">
+          <h5 class="card-title flex-grow-1 text-center">{{person.name}}</h5>
+          <button type="button" class="btn btn-dark">Full Details</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700');
+html {
+  box-sizing: border-box;
+  width: 100%;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  overflow-x: hidden;
+  width: 100%;
+  min-height: 100%;
+  font-size: 18px;
+  margin: 0;
+  background-color: white;
+  -webkit-font-smoothing: antialiased;
+  font-family: 'PT Sans', sans-serif;
+}
+a {
+  display: inline-block;
+  text-decoration-skip-ink: auto;
+  color: inherit;
+  position: relative;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1) 0s;
+}
+p {
+  margin: 0px 0px 15px;
+}
