@@ -55,6 +55,7 @@
   <div id="searchResults" class="row mx-lg-n5" *ngIf="searchResults">
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex py-3 px-m-5" *ngFor="let result of searchResults">
       <div class="card d-flex flex-column flex-grow-1" *ngIf="result.media_type == 'movie'">
+        <h5 class="p-2 text-center"><b>Movie</b></h5>
         <img *ngIf="result.poster_path" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" class="card-img-top" alt="{{result.title}}">
         <img *ngIf="!result.poster_path" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{result.title}}">
          <div class="card-body">
@@ -64,6 +65,7 @@
         </div>
       </div>
       <div class="card d-flex flex-column flex-grow-1" *ngIf="result.media_type == 'tv'">
+        <h5 class="p-2 text-center"><b>TV Show</b></h5>
         <img *ngIf="result.poster_path" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" class="card-img-top" alt="{{result.name}}">
         <img *ngIf="!result.poster_path" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{result.name}}">
         <div class="card-body">
@@ -73,6 +75,7 @@
         </div>
       </div>
       <div class="card d-flex flex-column flex-grow-1" *ngIf="result.media_type == 'person'">
+        <h5 class="p-2 text-center"><b>Person</b></h5>
         <img *ngIf="result.profile_path" src="https://image.tmdb.org/t/p/w500/{{result.profile_path}}" class="card-img-top" alt="{{result.name}}">
         <img *ngIf="!result.profile_path" src="../../assets/person-poster-placeholder.png" class="card-img-top" alt="{{result.name}}">
         <div class="card-body">

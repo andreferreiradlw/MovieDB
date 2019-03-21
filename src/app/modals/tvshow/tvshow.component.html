@@ -1,12 +1,66 @@
 <div class="modal-header">
-  <h4 class="modal-title">{{data.name}}</h4>
+  <h2 class="modal-title"><b>{{data.name}}</b></h2>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
-  <p>{{data.overview}}</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-light" (click)="activeModal.close('Close click')">Close</button>
+<div class="modal-body d-flex flex-column">
+  <div class="d-flex flex-column flex-lg-row">
+    <img *ngIf="data.poster_path" src="https://image.tmdb.org/t/p/w500/{{data.poster_path}}" alt="{{data.name}}">
+    <img *ngIf="!data.poster_path" src="../../assets/film-poster-placeholder.png" alt="{{data.name}}">
+    <div class="p-2 d-flex flex-column">
+      <div class="p-2" *ngIf="data.overview">
+        <h5><b>Overview</b></h5>
+        <p>{{data.overview}}</p>
+      </div>
+      <div class="d-flex flex-row flex-wrap p-1">
+        <div class="p-2 flex-fill d-flex flex-column col-4" *ngIf="data.status">
+          <h6 class="flex-fill"><b>Status:</b></h6>
+          <p>{{data.status}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-4" *ngIf="data.type">
+          <h6 class="flex-fill"><b>Type:</b></h6>
+          <p>{{data.type}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-4" *ngIf="data.origin_country.length > 0">
+          <h6 class="flex-fill"><b>Origin Country:</b></h6>
+          <p>{{data.origin_country[0]}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.number_of_seasons">
+          <h6 class="flex-fill"><b># Seasons:</b></h6>
+          <p>{{data.number_of_seasons}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.number_of_episodes">
+          <h6 class="flex-fill"><b># Episodes:</b></h6>
+          <p>{{data.number_of_episodes}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.first_air_date">
+          <h6 class="flex-fill"><b>First Air Date:</b></h6>
+          <p>{{data.first_air_date}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.last_air_date">
+          <h6 class="flex-fill"><b>Last Air Date:</b></h6>
+          <p>{{data.last_air_date}}</p>
+        </div>
+      </div>
+      <div class="p-2 d-flex flex-row flex-wrap">
+        <div class="p-2 flex-fill d-flex flex-column col-6" *ngIf="data.last_episode_to_air">
+          <h6 class="flex-fill"><b>Last Episode to Air:</b></h6>
+          <p style="margin: 0;">"{{data.last_episode_to_air.name}}"</p>
+          <p><i>Season {{data.last_episode_to_air.season_number}} - Episode
+              {{data.last_episode_to_air.episode_number}}</i></p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-6" *ngIf="data.next_episode_to_air">
+          <h6 class="flex-fill"><b>Next Episode to Air:</b></h6>
+          <p style="margin: 0;">"{{data.next_episode_to_air.name}}"</p>
+          <p><i>Season {{data.next_episode_to_air.season_number}} - Episode {{data.next_episode_to_air.episode_number}}</i></p>
+        </div>
+      </div>
+      <div>
+        <a *ngIf="data.homepage" class="btn btn-info m-2" href="{{data.homepage}}" target="_blank"
+          role="button"><b>Visit Website</b></a>
+      </div>
+    </div>
+  </div>
+
 </div>
