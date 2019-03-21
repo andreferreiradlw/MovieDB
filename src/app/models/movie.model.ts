@@ -21,4 +21,5 @@ export class Movie {
 
   getBackdrop = () => `https://image.tmdb.org/t/p/original/${this.backdroppath}`;
   shortOverview = () => `${this.overview.substring(0, 230)} ${this.overview.length > 230 ? '(...)' : ''}`;
+  getYear = () => this.releasedate.getFullYear();
 }

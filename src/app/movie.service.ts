@@ -43,7 +43,7 @@ export class MovieService {
         movie.backdroppath = entry.backdrop_path;
         movie.adult = entry.adult;
         movie.overview = entry.overview;
-        movie.releasedate = entry.release_date;
+        movie.releasedate = new Date(entry.release_date);
         finalMovies.push(movie);
       });
       console.log(finalMovies);

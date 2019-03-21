@@ -20,6 +20,7 @@
       <div class="card">
         <img src="{{movie.getBackdrop()}}" class="card-img-top" alt="{{movie.title}}">
         <div class="card-body d-flex flex-column">
+          <h6><b>{{movie.getYear()}}</b></h6>
           <h3 class="card-title"><b>#{{i+1}} {{movie.title}}</b></h3>
           <p class="card-text flex-grow-1">{{movie.shortOverview()}}</p>
           <button type="button" class="btn btn-dark align-self-end" (click)="getDetails(movie.id, 'movie')">Full

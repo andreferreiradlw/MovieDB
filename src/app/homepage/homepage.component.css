@@ -1,6 +1,13 @@
 main,
 .jumbotron {
-  background-color: black;
+  background-color: #12181B;
+}
+.card {
+  border: none;
+}
+.card:hover {
+  transform: translateY(-2px);
+  transition: transform 0.2s ease;
 }
 #searchResults .card-img-top {
   height: 130vw;
