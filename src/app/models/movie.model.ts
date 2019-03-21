@@ -13,6 +13,9 @@ export class Movie {
   adult: boolean;
   overview: string;
   releasedate: Date;
+  genres: [];
+  imdbid: string;
+  productioncompanies: [];
 
   constructor() {}
 

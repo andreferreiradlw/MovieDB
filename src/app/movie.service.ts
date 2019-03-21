@@ -16,7 +16,8 @@ export class MovieService {
   // subjects
   private topMoviesUpdated = new Subject<Movie[]>();
   private topShowsUpdated = new Subject<TvShow[]>();
-  private topPersonsUpdated = new Subject<TvShow[]>();
+  private topPersonsUpdated = new Subject<Person[]>();
+  private singleDetailsUpdated = new Subject<any[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -88,7 +89,7 @@ export class MovieService {
     // tslint:disable-next-line: max-line-length
     this.http.get<{page: number, total_results: number, total_pages: number, results: []}>(`${this.apiUrl}/person/popular?api_key=${this.apiKey}&language=en-US&page=1`)
     .subscribe(personData => {
-      const finalPersons = [];
+      const finalPersons: Person[] = [];
       personData.results.forEach((entry: any) => {
         const person = new Person();
         person.id = entry.id;
@@ -107,5 +108,15 @@ export class MovieService {
     return this.topPersonsUpdated.asObservable();
     // listen to the subject
   }
-
+  getSingleDetails(currentId: string, currentType: string) {
+    this.http.get<any>(`${this.apiUrl}/${currentType}/${currentId}?api_key=${this.apiKey}&language=en-US&page=1`)
+      .subscribe(currentData => {
+        console.log(currentData);
+        this.singleDetailsUpdated.next(currentData);
+      });
+  }
+  getSingleDetailsUpdateListener() {
+    return this.singleDetailsUpdated.asObservable();
+    // listen to the subject
+  }
 }

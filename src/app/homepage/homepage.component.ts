@@ -26,6 +26,10 @@ export class HomepageComponent implements OnInit {
   private personSub: Subscription;
   showPersons = false;
 
+  // details
+  private detailsSub: Subscription;
+  currentDetails: any;
+
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
@@ -59,10 +63,19 @@ export class HomepageComponent implements OnInit {
     this.showTvShows = false;
     if (!this.top20Persons) {
       this.movieService.getPersons();
-      // will get initial array of tv shows from server
+      // will get initial array of persons from server
       this.personSub = this.movieService.getPersonUpdateListener()
         .subscribe(personsData => this.top20Persons = personsData);
     }
+  }
+  getDetails(id: string, type: string) {
+    this.movieService.getSingleDetails(id, type);
+    this.detailsSub = this.movieService.getSingleDetailsUpdateListener()
+        .subscribe(currentData => this.currentDetails = currentData);
+  }
+  onSearch(event: any) {
+    console.log(event);
+    console.log(event.target.value);
   }
 
 }
