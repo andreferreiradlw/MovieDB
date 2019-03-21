@@ -1,3 +1,39 @@
-main {
+main,
+.jumbotron {
   background-color: black;
+}
+#searchResults .card-img-top {
+  height: 130vw;
+  object-fit: cover;
+}
+/*MEDIA QUERIES*/
+@media (min-width:20em) {
+  /* smartphones width:320px */
+}
+@media (min-width:30em) {
+  /* smaller tablets width:480px */
+  #searchResults .card-img-top {
+    height: 80vw;
+  }
+}
+@media (min-width:48em) {
+  /* portrait tablets width:768px */
+  #searchResults .card-img-top {
+    height: 60vw;
+  }
+}
+@media (min-width:61.25em) {
+  /* tablet, landscape iPad, lo-res laptops ands desktops width:980px */
+  #searchResults .card-img-top {
+    height: 40vw;
+  }
+}
+@media (min-width:75em) {
+  /* big landscape tablets, laptops, and desktops width:1200px */
+  #searchResults .card-img-top {
+    height: 35vw;
+  }
+}
+@media (min-width:120em) {
+  /* hi-res laptops and desktops width:1920px */
 }

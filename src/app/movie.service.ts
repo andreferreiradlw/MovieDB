@@ -18,6 +18,7 @@ export class MovieService {
   private topShowsUpdated = new Subject<TvShow[]>();
   private topPersonsUpdated = new Subject<Person[]>();
   private singleDetailsUpdated = new Subject<any[]>();
+  private searchDetailsUpdated = new Subject<any[]>();
 
   constructor(private http: HttpClient) { }
 
@@ -117,6 +118,17 @@ export class MovieService {
   }
   getSingleDetailsUpdateListener() {
     return this.singleDetailsUpdated.asObservable();
+    // listen to the subject
+  }
+  getSearch(currentSearch: string) {
+// tslint:disable-next-line: max-line-length
+    this.http.get<any>(`${this.apiUrl}/search/multi?api_key=${this.apiKey}&language=en-US&page=1&include_adult=false&query=${currentSearch.split(' ').join('+')}`)
+      .subscribe(currentData => {
+        this.searchDetailsUpdated.next(currentData.results);
+      });
+  }
+  getSearchUpdateListener() {
+    return this.searchDetailsUpdated.asObservable();
     // listen to the subject
   }
 }

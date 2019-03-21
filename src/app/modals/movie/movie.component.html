@@ -1,12 +1,60 @@
 <div class="modal-header">
-  <h4 class="modal-title">{{data.title}}</h4>
+  <h2 class="modal-title"><b>{{data.title}}</b></h2>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<div class="modal-body">
-  <p>{{data.overview}}</p>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-light" (click)="activeModal.close('Close click')">Close</button>
+<div class="modal-body d-flex flex-column">
+  <div class="d-flex flex-column flex-lg-row">
+    <img *ngIf="data.poster_path" src="https://image.tmdb.org/t/p/w500/{{data.poster_path}}" alt="{{data.title}}">
+    <img *ngIf="!data.poster_path" src="../../assets/film-poster-placeholder.png" alt="{{data.title}}">
+    <div class="p-2 d-flex flex-column">
+      <div class="mb-2" *ngIf="data.tagline">
+        <h4>{{data.tagline}}</h4>
+      </div>
+      <div class="p-2" *ngIf="data.overview">
+        <h5><b>Overview</b></h5>
+        <p>{{data.overview}}</p>
+      </div>
+      <div class="d-flex flex-row flex-wrap p-1">
+        <div class="p-2 flex-fill d-flex flex-column col-3">
+          <h6 class="flex-fill"><b>Status:</b></h6>
+          <p>{{data.status}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.release_date">
+          <h6 class="flex-fill"><b>Release Date:</b></h6>
+          <p>{{data.release_date}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.popularity">
+          <h6 class="flex-fill"><b>Popularity:</b></h6>
+          <p>{{data.popularity}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.vote_average">
+          <h6 class="flex-fill"><b>Vote Average:</b></h6>
+          <p>{{data.vote_average}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.vote_count">
+          <h6 class="flex-fill"><b>Vote Count:</b></h6>
+          <p>{{data.vote_count}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.budget > 0 && data.budget">
+          <h6 class="flex-fill"><b>Budget:</b></h6>
+          <p>${{data.budget}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.revenue > 0 && data.revenue">
+          <h6 class="flex-fill"><b>Revenue:</b></h6>
+          <p>${{data.revenue}}</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.runtime > 0 && data.runtime">
+          <h6 class="flex-fill"><b>Runtime:</b></h6>
+          <p>{{data.runtime}} minutes</p>
+        </div>
+      </div>
+      <div>
+        <a *ngIf="data.homepage" class="btn btn-info m-2" href="{{data.homepage}}" target="_blank" role="button"><b>Visit Website</b></a>
+        <a *ngIf="data.imdb_id" class="btn btn-warning m-2" href="https://www.imdb.com/title/{{data.imdb_id}}" target="_blank" role="button"><b>IMDB Page</b></a>
+      </div>
+    </div>
+  </div>
+
 </div>

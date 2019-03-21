@@ -32,7 +32,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
 
   // details
   private detailsSub: Subscription;
-  currentDetails: any;
+  // search
+  private searchSub: Subscription;
+  searchResults: any;
 
   constructor(private movieService: MovieService, private modalService: NgbModal) { }
 
@@ -76,7 +78,6 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.movieService.getSingleDetails(id, type);
     this.detailsSub = this.movieService.getSingleDetailsUpdateListener()
         .subscribe(currentData => {
-          // this.currentDetails = currentData;
           this.openModal(currentData, type);
         });
   }
@@ -96,21 +97,34 @@ export class HomepageComponent implements OnInit, OnDestroy {
         oComponent = PersonComponent;
         break;
     }
-    const modalRef =  this.modalService.open(oComponent, { size: 'lg' });
+    // open modal with component as content and pass details
+    const modalRef =  this.modalService.open(oComponent, { size: 'lg', centered: true, windowClass: 'dark-modal' });
     modalRef.componentInstance.data = currentData;
   }
   onSearch(event: any) {
-    console.log(event);
-    console.log(event.target.value);
+    const searchString = event.target.value;
+    if (searchString) {
+      // get value from input
+      this.movieService.getSearch(searchString);
+      this.searchSub = this.movieService.getSearchUpdateListener()
+        .subscribe(currentData => {
+          this.searchResults = currentData;
+          console.log(this.searchResults);
+          // unsub
+          this.searchSub.unsubscribe();
+        });
+    } else {
+      this.searchResults = null;
+    }
   }
   ngOnDestroy(): void {
     // Called once, before the instance is destroyed.
-    // Add 'implements OnDestroy' to the class.
     // unsubscribe all
     this.movieSub.unsubscribe();
     this.tvshowSub.unsubscribe();
     this.personSub.unsubscribe();
     this.detailsSub.unsubscribe();
+    this.searchSub.unsubscribe();
   }
 
 }
