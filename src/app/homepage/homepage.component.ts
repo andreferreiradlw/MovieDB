@@ -1,16 +1,20 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { Movie } from '../models/movie.model';
 import { TvShow } from '../models/tvshow.model';
 import { Person } from '../models/person.model';
 import { Subscription } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { MovieComponent } from '../modals/movie/movie.component';
+import { TvshowComponent } from '../modals/tvshow/tvshow.component';
+import { PersonComponent } from '../modals/person/person.component';
 
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css']
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements OnInit, OnDestroy {
   // movies
   top20Movies: Movie[];
   private movieSub: Subscription;
@@ -30,7 +34,7 @@ export class HomepageComponent implements OnInit {
   private detailsSub: Subscription;
   currentDetails: any;
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService, private modalService: NgbModal) { }
 
   ngOnInit() {
     this.getTopMovies();
@@ -71,11 +75,42 @@ export class HomepageComponent implements OnInit {
   getDetails(id: string, type: string) {
     this.movieService.getSingleDetails(id, type);
     this.detailsSub = this.movieService.getSingleDetailsUpdateListener()
-        .subscribe(currentData => this.currentDetails = currentData);
+        .subscribe(currentData => {
+          // this.currentDetails = currentData;
+          this.openModal(currentData, type);
+        });
+  }
+  openModal(currentData: any, type: string) {
+    // unsubscribe
+    this.detailsSub.unsubscribe();
+    // set component
+    let oComponent: any;
+    switch (type) {
+      case 'movie':
+        oComponent = MovieComponent;
+        break;
+      case 'tv':
+        oComponent = TvshowComponent;
+        break;
+      case 'person':
+        oComponent = PersonComponent;
+        break;
+    }
+    const modalRef =  this.modalService.open(oComponent, { size: 'lg' });
+    modalRef.componentInstance.data = currentData;
   }
   onSearch(event: any) {
     console.log(event);
     console.log(event.target.value);
+  }
+  ngOnDestroy(): void {
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
+    // unsubscribe all
+    this.movieSub.unsubscribe();
+    this.tvshowSub.unsubscribe();
+    this.personSub.unsubscribe();
+    this.detailsSub.unsubscribe();
   }
 
 }
