@@ -1,17 +1,21 @@
 <main class="container-fluid px-lg-5">
   <header class="row">
     <div class="col-12">
-      <div class="jumbotron text-light">
-        <h1 class="display-4"><b>Cinema Top 20</b></h1>
-        <p class="lead">The hottest stuff in cinema right now!</p>
-        <button [disabled]="showMovies" type="button" class="btn btn-light mr-2" (click)="getTopMovies()">Top
-          Movies</button>
-        <button [disabled]="showTvShows" type="button" class="btn btn-light mr-2" (click)="getTopShows()">Top
-          Series</button>
-        <button [disabled]="showPersons" type="button" class="btn btn-light m-2" (click)="getTopPersons()">Top
-          People</button>
-        <input id="nameFilter" class="form-control" type="text" name="search" (keyup)="onSearch($event)"
-          autocomplete="off" placeholder="Search">
+      <div class="jumbotron text-light row">
+        <h1 class="display-4 col-12 headliner"><b>Cinema Top 20</b></h1>
+        <p class="lead col-12">The hottest stuff in cinema right now!</p>
+        <div class="col-12 col-xl-4 mb-2 d-flex flex-column flex-sm-row align-items-center">
+          <button [disabled]="showMovies" type="button" class="btn btn-light mr-2 mb-1" (click)="getTopMovies()">Top
+                Movies</button>
+          <button [disabled]="showTvShows" type="button" class="btn btn-light mr-2 mb-1" (click)="getTopShows()">Top
+                Series</button>
+          <button [disabled]="showPersons" type="button" class="btn btn-light mb-1" (click)="getTopPersons()">Top
+                People</button>
+        </div>
+        <div class="col-12 col-xl-8">
+          <input id="nameFilter" class="form-control" type="text" name="search" (keyup)="onSearch($event)"
+            autocomplete="off" placeholder="Search">
+        </div>
       </div>
     </div>
   </header>

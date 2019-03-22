@@ -7,7 +7,7 @@
 <div class="modal-body d-flex flex-column">
   <div class="d-flex flex-column flex-lg-row">
     <div class="d-flex flex-column align-items-center poster">
-      <img *ngIf="data.networks[0].logo_path" class="network-logo p-2" src="https://image.tmdb.org/t/p/w200{{data.networks[0].logo_path}}" alt="data.networks[0].name" width="100">
+      <img *ngIf="data.networks.length > 0 && data.networks[0].logo_path" class="network-logo p-2" src="https://image.tmdb.org/t/p/w200{{data.networks[0].logo_path}}" alt="data.networks[0].name" width="100">
       <img *ngIf="data.poster_path" src="https://image.tmdb.org/t/p/w500/{{data.poster_path}}" alt="{{data.name}}">
       <img *ngIf="!data.poster_path" src="../../assets/film-poster-placeholder.png" alt="{{data.name}}">
     </div>
@@ -63,7 +63,7 @@
         <div class="col-12">
           <a *ngIf="data.homepage" class="btn btn-info" href="{{data.homepage}}" target="_blank"
             role="button"><b>Visit Website</b></a>
-        </div>>
+        </div>
       </div>
     </div>
   </div>

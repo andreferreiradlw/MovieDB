@@ -2,6 +2,12 @@ main,
 .jumbotron {
   background-color: #12181B;
 }
+.jumbotron {
+  margin-bottom: 0;
+}
+.headliner {
+  font-size: 1.8rem;
+}
 .card {
   border: none;
 }
@@ -12,6 +18,7 @@ main,
 }
 .lead {
   border-bottom: 3px dashed #2a2e35;
+  font-size: 0.9rem;
 }
 #searchResults .card-img-top {
   height: 130vw;
@@ -23,18 +30,30 @@ main,
 }
 @media (min-width:30em) {
   /* smaller tablets width:480px */
+  .headliner {
+    font-size: 2.5rem;
+  }
+  .lead {
+    font-size: 1.25rem;
+  }
   #searchResults .card-img-top {
     height: 80vw;
   }
 }
 @media (min-width:48em) {
   /* portrait tablets width:768px */
+  .headliner {
+    font-size: 3rem;
+  }
   #searchResults .card-img-top {
     height: 60vw;
   }
 }
 @media (min-width:61.25em) {
   /* tablet, landscape iPad, lo-res laptops ands desktops width:980px */
+  .headliner {
+    font-size: 3.5rem;
+  }
   #searchResults .card-img-top {
     height: 40vw;
   }
