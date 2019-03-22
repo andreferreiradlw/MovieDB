@@ -42,7 +42,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     this.getTopMovies();
   }
   getTopMovies() {
-    this.showMovies = !this.showMovies;
+    this.showMovies = true;
     this.showTvShows = false;
     this.showPersons = false;
     if (!this.top20Movies) {
@@ -53,7 +53,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
   }
   getTopShows() {
-    this.showTvShows = !this.showTvShows;
+    this.showTvShows = true;
     this.showMovies = false;
     this.showPersons = false;
     if (!this.top20Shows) {
@@ -64,7 +64,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
     }
   }
   getTopPersons() {
-    this.showPersons = !this.showPersons;
+    this.showPersons = true;
     this.showMovies = false;
     this.showTvShows = false;
     if (!this.top20Persons) {
@@ -104,6 +104,9 @@ export class HomepageComponent implements OnInit, OnDestroy {
   onSearch(event: any) {
     const searchString = event.target.value;
     if (searchString) {
+      this.showPersons = true;
+      this.showMovies = true;
+      this.showTvShows = true;
       // get value from input
       this.movieService.getSearch(searchString);
       this.searchSub = this.movieService.getSearchUpdateListener()
@@ -115,6 +118,7 @@ export class HomepageComponent implements OnInit, OnDestroy {
         });
     } else {
       this.searchResults = null;
+      this.getTopMovies();
     }
   }
   ngOnDestroy(): void {

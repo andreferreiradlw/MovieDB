@@ -4,9 +4,9 @@
       <div class="jumbotron text-light">
         <h1 class="display-4"><b>Cinema Top 20</b></h1>
         <p class="lead">The hottest stuff in cinema right now!</p>
-        <button [disabled]="showMovies" type="button" class="btn btn-light m-2" (click)="getTopMovies()">Top
+        <button [disabled]="showMovies" type="button" class="btn btn-light mr-2" (click)="getTopMovies()">Top
           Movies</button>
-        <button [disabled]="showTvShows" type="button" class="btn btn-light m-2" (click)="getTopShows()">Top
+        <button [disabled]="showTvShows" type="button" class="btn btn-light mr-2" (click)="getTopShows()">Top
           Series</button>
         <button [disabled]="showPersons" type="button" class="btn btn-light m-2" (click)="getTopPersons()">Top
           People</button>
@@ -18,7 +18,8 @@
   <div class="row mx-lg-n5" *ngIf="showMovies && !searchResults">
     <div class="col-12 col-sm-6 col-lg-4 d-flex py-3 px-m-5" *ngFor="let movie of top20Movies; index as i">
       <div class="card">
-        <img src="{{movie.getBackdrop()}}" class="card-img-top" alt="{{movie.title}}">
+        <img *ngIf="movie.posterpath" src="{{movie.getBackdrop()}}" class="card-img-top" alt="{{movie.title}}" (click)="getDetails(movie.id, 'movie')">
+        <img *ngIf="!movie.posterpath" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{movie.title}}" (click)="getDetails(result.id, 'movie')">
         <div class="card-body d-flex flex-column">
           <h6><b>{{movie.getYear()}}</b></h6>
           <h3 class="card-title"><b>#{{i+1}} {{movie.title}}</b></h3>
@@ -32,7 +33,8 @@
   <div class="row mx-lg-n5" *ngIf="showTvShows && !searchResults">
     <div class="col-12 col-sm-6 col-lg-4 d-flex py-3 px-m-5" *ngFor="let show of top20Shows; index as i">
       <div class="card">
-        <img src="{{show.getBackdrop()}}" class="card-img-top" alt="{{show.title}}">
+        <img *ngIf="show.posterpath" src="{{show.getBackdrop()}}" class="card-img-top" alt="{{show.title}}" (click)="getDetails(show.id, 'tv')">
+        <img *ngIf="!show.posterpath" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{show.name}}" (click)="getDetails(result.id, 'tv')">
         <div class="card-body d-flex flex-column">
           <h3 class="card-title"><b>#{{i+1}} {{show.name}}</b></h3>
           <p class="card-text flex-grow-1">{{show.shortOverview()}}</p>
@@ -45,7 +47,8 @@
   <div class="row mx-lg-n5" *ngIf="showPersons && !searchResults">
     <div class="col-12 col-sm-6 col-lg-4 col-xl-2 d-flex py-3 px-m-5" *ngFor="let person of top20Persons">
       <div class="card">
-        <img src="{{person.getBackdrop()}}" class="card-img-top" alt="{{person.name}}">
+        <img *ngIf="person.profilepath" src="{{person.getBackdrop()}}" class="card-img-top" alt="{{person.name}}" (click)="getDetails(person.id, 'person')">
+        <img *ngIf="!person.profilepath" src="../../assets/person-poster-placeholder.png" class="card-img-top" alt="{{person.name}}" (click)="getDetails(result.id, 'person')">
         <div class="card-body d-flex flex-column p-1">
           <h3 class="card-title flex-grow-1 text-center"><b>{{person.name}}</b></h3>
           <button type="button" class="btn btn-dark" (click)="getDetails(person.id, 'person')">Full Details</button>
@@ -57,8 +60,8 @@
     <div class="col-12 col-sm-6 col-lg-4 col-xl-3 d-flex py-3 px-m-5" *ngFor="let result of searchResults">
       <div class="card d-flex flex-column flex-grow-1" *ngIf="result.media_type == 'movie'">
         <h5 class="p-2 text-center"><b>Movie</b></h5>
-        <img *ngIf="result.poster_path" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" class="card-img-top" alt="{{result.title}}">
-        <img *ngIf="!result.poster_path" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{result.title}}">
+        <img *ngIf="result.poster_path" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" class="card-img-top" alt="{{result.title}}" (click)="getDetails(result.id, 'movie')">
+        <img *ngIf="!result.poster_path" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{result.title}}" (click)="getDetails(result.id, 'movie')">
          <div class="card-body">
            <h3 class="card-title"><b>{{result.title}}</b></h3>
            <button type="button" class="btn btn-dark align-self-end" (click)="getDetails(result.id, 'movie')">Full
@@ -67,8 +70,8 @@
       </div>
       <div class="card d-flex flex-column flex-grow-1" *ngIf="result.media_type == 'tv'">
         <h5 class="p-2 text-center"><b>TV Show</b></h5>
-        <img *ngIf="result.poster_path" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" class="card-img-top" alt="{{result.name}}">
-        <img *ngIf="!result.poster_path" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{result.name}}">
+        <img *ngIf="result.poster_path" src="https://image.tmdb.org/t/p/w500/{{result.poster_path}}" class="card-img-top" alt="{{result.name}}" (click)="getDetails(result.id, 'tv')">
+        <img *ngIf="!result.poster_path" src="../../assets/film-poster-placeholder.png" class="card-img-top" alt="{{result.name}}" (click)="getDetails(result.id, 'tv')">
         <div class="card-body">
           <h3 class="card-title"><b>{{result.name}}</b></h3>
           <button type="button" class="btn btn-dark align-self-end" (click)="getDetails(result.id, 'tv')">Full
@@ -77,8 +80,8 @@
       </div>
       <div class="card d-flex flex-column flex-grow-1" *ngIf="result.media_type == 'person'">
         <h5 class="p-2 text-center"><b>Person</b></h5>
-        <img *ngIf="result.profile_path" src="https://image.tmdb.org/t/p/w500/{{result.profile_path}}" class="card-img-top" alt="{{result.name}}">
-        <img *ngIf="!result.profile_path" src="../../assets/person-poster-placeholder.png" class="card-img-top" alt="{{result.name}}">
+        <img *ngIf="result.profile_path" src="https://image.tmdb.org/t/p/w500/{{result.profile_path}}" class="card-img-top" alt="{{result.name}}" (click)="getDetails(result.id, 'person')">
+        <img *ngIf="!result.profile_path" src="../../assets/person-poster-placeholder.png" class="card-img-top" alt="{{result.name}}" (click)="getDetails(result.id, 'person')">
         <div class="card-body">
           <h3 class="card-title"><b>{{result.name}}</b></h3>
           <button type="button" class="btn btn-dark" (click)="getDetails(result.id, 'person')">Full Details</button>

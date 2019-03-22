@@ -8,6 +8,10 @@ main,
 .card:hover {
   transform: translateY(-2px);
   transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.lead {
+  border-bottom: 3px dashed #2a2e35;
 }
 #searchResults .card-img-top {
   height: 130vw;

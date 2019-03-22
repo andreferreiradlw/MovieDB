@@ -3,7 +3,10 @@ img {
   object-fit: contain;
   display: none;
 }
-
+.genres {
+  display: inline-block;
+  margin-bottom: 0;
+}
 /*MEDIA QUERIES*/
 @media (min-width:20em) {
   /* smartphones width:320px */

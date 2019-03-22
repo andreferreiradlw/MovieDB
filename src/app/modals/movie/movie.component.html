@@ -1,5 +1,10 @@
 <div class="modal-header">
-  <h2 class="modal-title"><b>{{data.title}}</b></h2>
+  <div class="d-flex flex-column">
+      <h2 class="modal-title"><b>{{data.title}}</b></h2>
+      <div class="d-flex">
+        <p *ngFor="let genre of data.genres" class="genres"><span class="badge badge-secondary mx-1">{{genre.name}}</span></p>
+      </div>
+  </div>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
@@ -9,7 +14,7 @@
     <img *ngIf="data.poster_path" src="https://image.tmdb.org/t/p/w500/{{data.poster_path}}" alt="{{data.title}}">
     <img *ngIf="!data.poster_path" src="../../assets/film-poster-placeholder.png" alt="{{data.title}}">
     <div class="p-2 d-flex flex-column">
-      <div class="mb-2" *ngIf="data.tagline">
+      <div class="px-2" *ngIf="data.tagline">
         <h4>{{data.tagline}}</h4>
       </div>
       <div class="p-2" *ngIf="data.overview">
@@ -48,6 +53,14 @@
         <div class="p-2 flex-fill d-flex flex-column col-3" *ngIf="data.runtime > 0 && data.runtime">
           <h6 class="flex-fill"><b>Runtime:</b></h6>
           <p>{{data.runtime}} minutes</p>
+        </div>
+        <div class="p-2 flex-fill d-flex flex-column col-12" *ngIf="data.production_companies">
+          <h6 class="flex-fill"><b>Production Companies:</b></h6>
+          <div class="d-flex flex-wrap">
+            <div *ngFor="let company of data.production_companies" class="col-6">
+              <p>{{company.name}}</p>
+            </div>
+          </div>
         </div>
       </div>
       <div>

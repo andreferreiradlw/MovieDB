@@ -6,8 +6,11 @@
 </div>
 <div class="modal-body d-flex flex-column">
   <div class="d-flex flex-column flex-lg-row">
-    <img *ngIf="data.poster_path" src="https://image.tmdb.org/t/p/w500/{{data.poster_path}}" alt="{{data.name}}">
-    <img *ngIf="!data.poster_path" src="../../assets/film-poster-placeholder.png" alt="{{data.name}}">
+    <div class="d-flex flex-column align-items-center poster">
+      <img *ngIf="data.networks[0].logo_path" class="network-logo p-2" src="https://image.tmdb.org/t/p/w200{{data.networks[0].logo_path}}" alt="data.networks[0].name" width="100">
+      <img *ngIf="data.poster_path" src="https://image.tmdb.org/t/p/w500/{{data.poster_path}}" alt="{{data.name}}">
+      <img *ngIf="!data.poster_path" src="../../assets/film-poster-placeholder.png" alt="{{data.name}}">
+    </div>
     <div class="p-2 d-flex flex-column">
       <div class="p-2" *ngIf="data.overview">
         <h5><b>Overview</b></h5>
@@ -56,9 +59,11 @@
           <p><i>Season {{data.next_episode_to_air.season_number}} - Episode {{data.next_episode_to_air.episode_number}}</i></p>
         </div>
       </div>
-      <div>
-        <a *ngIf="data.homepage" class="btn btn-info m-2" href="{{data.homepage}}" target="_blank"
-          role="button"><b>Visit Website</b></a>
+      <div class="row d-flex flex-column p-2">
+        <div class="col-12">
+          <a *ngIf="data.homepage" class="btn btn-info" href="{{data.homepage}}" target="_blank"
+            role="button"><b>Visit Website</b></a>
+        </div>>
       </div>
     </div>
   </div>
